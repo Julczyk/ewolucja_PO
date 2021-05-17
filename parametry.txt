@@ -1,0 +1,14 @@
+pocz_ile_robów 50
+pocz_progr iiwiijiiip
+pocz_energia 15
+ile_daje_jedzenie 8
+ile_rośnie_jedzenie 3
+koszt_tury 3
+pr_powielenia 0.2
+ułamek_energii_rodzica 0.35
+wył_instr 
+pr_usunięcia_instr 0.1
+pr_dodania_instr 0.1
+pr_zmiany_instr 0.15
+co_ile_wypisz 10
+
