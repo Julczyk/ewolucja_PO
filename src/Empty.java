@@ -8,4 +8,9 @@ public class Empty extends Field{
         super.printDistinct();
         return '.';
     }
+
+    protected boolean hasFood(){
+        super.hasFood();
+        return false;
+    }
 }

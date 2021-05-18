@@ -14,12 +14,13 @@ public class Parameters {
     double breedingProbability; //pr_powielenia
     double breedingPart; //ułamek_energii_rodzica
     int breedingMinimum;
-    Instruction[] Excluded; //wył_instr
+    Instructions //wył_instr
     double mutationRemovalProbability; //pr_usunięcia_instr
     double mutationAdditionProbability; //pr_dodania_instr
     double mutationModifierProbability; //pr_zmiany_instr
     int graphingPeriod; //co_ile_wypisz
     int simDuration; //ile_tur
+
 
 
     public Parameters(int x, int y){
@@ -90,6 +91,9 @@ public class Parameters {
                     case "ile_tur":
                         this.simDuration = paramReader.nextInt();
                         break;
+
+                    case "wył_instr":
+                        this.
                 }
             }
             paramReader.close();

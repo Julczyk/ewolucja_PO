@@ -8,6 +8,7 @@ public class Plansza {
     protected int ySize;
     String rawData;
     protected Field[][] fields;
+    int seasonLenght;
 
     public Plansza() {
         this.rawData="";
@@ -55,6 +56,10 @@ public class Plansza {
 
     }
 
+    protected void setSeasonLenght(int lenght) {
+        this.seasonLenght = lenght;
+    }
+
     protected void print() {
         System.out.println("RAW:");
         System.out.println(rawData);
@@ -65,6 +70,16 @@ public class Plansza {
             }
             System.out.println();
         }
+    }
+
+    protected Field getRandomField(){
+        int randX = (int)Math.random() * xSize;
+        int randY = (int)Math.random() * ySize;
+        return fields[randX][randY];
+    }
+
+    protected Field at(int x, int y) {
+        return fields[(x+xSize)%xSize] [(y+ySize)%ySize];
     }
 
 }

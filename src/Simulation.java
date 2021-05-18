@@ -14,13 +14,30 @@ public class Simulation {
     }
 
     private void init(String boardFilePath, String paramsFilePath) {
+        this.board = new Plansza();
+        board.readFromFile(boardFilePath);
 
+        this.params = new Parameters(board.xSize, board.ySize);
+        params.readFromFile(paramsFilePath);
+
+        board.setSeasonLenght(params.seasonLenght);
+    }
+
+    public int getFreeID(){
+        freeID++;
+        return freeID;
+    }
+
+    protected void populate(){
+        for(int i=0; i<params.beginRobzAm; i++) {
+
+        }
     }
 
 
     public static void main(String[] args) {
         Simulation world = new Simulation();
-
+        world.init("plansza.txt","parametry.txt");
     }
 
 }
