@@ -32,6 +32,7 @@ public class Parameters {
     }
 
     protected void readFromFile(String filepath) {
+        int numberOfArgs = 0;
         try {
             File parameters = new File(filepath);
             Scanner lineReader = new Scanner(parameters);
@@ -46,75 +47,90 @@ public class Parameters {
                     switch (param) {
                         case "pocz_ile_robów":
                             this.beginRobzAm = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
 
                         case "pocz_progr":
                             this.beginRobzProgramm = paramReader.next();
+                            numberOfArgs++;
                             break;
 
                         case "pocz_energia":
                             this.beginEnergyAmmount = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
 
                         case "ile_daje_jedzenie":
                             this.nutritiousValue = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
 
                         case "ile_rośnie_jedzenie":
                             this.seasonLenght = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
 
                         case "koszt_tury":
                             this.turnCost = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
 
                         case "pr_powielenia":
                             this.breedingProbability = paramReader.nextDouble();
+                            numberOfArgs++;
                             break;
 
                         case "ułamek_energii_rodzica":
                             this.breedingPart = paramReader.nextDouble();
+                            numberOfArgs++;
                             break;
 
                         case "limit_powielania":
                             this.breedingMinimum = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
 
                         case "pr_usunięcia_instr":
                             this.mutationRemovalProbability = paramReader.nextDouble();
+                            numberOfArgs++;
                             break;
 
                         case "pr_dodania_inst":
                             this.mutationAdditionProbability = paramReader.nextDouble();
+                            numberOfArgs++;
                             break;
 
                         case "pr_zmiany_instr":
                             this.mutationModifierProbability = paramReader.nextDouble();
+                            numberOfArgs++;
                             break;
 
                         case "co_ile_wypisz":
                             this.graphingPeriod = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
 
                         case "ile_tur":
                             this.simDuration = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
 
                         case "wył_instr":
                             this.excludedInstructions = paramReader.next();
+                            numberOfArgs++;
                             break;
 
                         case "ruch_bez_kar":
                             this.movesWithousEnergyLoss = paramReader.nextInt();
+                            numberOfArgs++;
                             break;
                     }
-                    System.out.print("Odczytane");
-                    System.out.println(param);
                 }
                 paramReader.close();
 
             }
-            lineReader.close();
+            if(numberOfArgs < 16)
+                System.err.println("Parameter(s) are missing from file. Check the file and rerun the sim.");
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();

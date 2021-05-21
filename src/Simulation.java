@@ -17,14 +17,19 @@ public class Simulation {
     }
 
     private void init(String boardFilePath, String paramsFilePath) {
+        System.out.println("Making and filling a board...");
         this.board = new Board();
         board.readFromFile(boardFilePath);
 
+        System.out.println("Reading parameters...");
         this.params = new Parameters(board.xSize, board.ySize);
         params.readFromFile(paramsFilePath);
 
+        System.out.println("Starting initial settlement...");
         board.setSeasonLenght(params.seasonLenght);
         populate();
+
+        System.out.println("World is ready.");
     }
 
     public int getFreeID(){
@@ -92,9 +97,10 @@ public class Simulation {
     }
 
     public void printExtinctMessage(){
-        System.out.print("\n\n\n-!!!-\nSymulacja przerwana, ostatni rob wyginął w turze ");
+        System.out.print("\n\n\n-!!!-\nRobZ are extinct by the turn nr.");
         System.out.println(turn);
-        System.out.println("Raport końcowy:");
+        System.out.println("Simulation will be terminated.");
+
     }
 
     public void printReport(){
@@ -224,9 +230,18 @@ public class Simulation {
 
     public static void main(String[] args) {
         Simulation world = new Simulation();
-        world.init("plansza.txt","parametry.txt");
-        world.run();
-    }
 
+        if(args.length == 0) {
+            world.init("plansza.txt","parametry.txt");
+            world.run();
+        }
+        else if(args.length == 2) {
+            world.init(args[0], args[1]);
+            world.run();
+        }
+        else
+            System.err.println("Invalid number of arguments.");
+
+    }
 
 }

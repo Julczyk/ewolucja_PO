@@ -43,9 +43,6 @@ public class Board {
         char cr;
         for(int i=0; i<ySize; i++) {
             for(int j=0; j<xSize; j++) {
-                System.out.print(j);
-                System.out.print(",");
-                System.out.println(i);
                 cr = arrayData[i*xSize+j];
                 if(cr == ' ')
                     fields[j][i] = new Empty(j,i,this);

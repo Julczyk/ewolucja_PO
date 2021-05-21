@@ -62,16 +62,12 @@ public class Rob {
         }
     }
 
+    //rozmnaża roba
     protected Rob breed(){
         boolean add = Math.random() <= world.params.mutationAdditionProbability;
         boolean remove = Math.random() <= world.params.mutationRemovalProbability;
         boolean modify = Math.random() <= world.params.mutationModifierProbability;
 
-        int newLenght = program.lenght;
-        if(add)
-            newLenght++;
-        if(remove)
-            newLenght--;
 
         String childProgram = "";
         char[] parentProgram = program.raw.toCharArray();

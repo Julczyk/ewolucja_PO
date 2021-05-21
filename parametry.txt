@@ -1,9 +1,9 @@
 pocz_ile_robów 20
 pocz_progr iilliiiip
-pocz_energia 60000
-ile_daje_jedzenie 8
+pocz_energia 600
+ile_daje_jedzenie 1200
 ile_rośnie_jedzenie 5
-koszt_tury 20
+koszt_tury 200
 pr_powielenia 0,2
 ułamek_energii_rodzica 0,1
 wył_instr jw

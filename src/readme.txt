@@ -12,6 +12,7 @@ Modyfikacje wprowadzone względem oryginalnej treści:
     Powyższe 2 punkty sprawiają, że punkt równowagi zarówno jeżeli chodzi o populację, jak i długość programu - nie wytrzeliwuje do nieskończoności.
 
  - prawdopodobieństwa wg konwencji matematycznej - w przedziale [0-1].
+ - Nie ma potrzeby podawać w parametrach wymiarów planszy. Prawidłowo napisany plik "plansza.txt" pozwala programowi "wydedukować" wymiary.
 
 
 Obserwacje:
