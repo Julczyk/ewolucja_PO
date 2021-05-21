@@ -1,6 +1,6 @@
 public class Empty extends Field{
 
-    public Empty(int x, int y, Plansza brd){
+    public Empty(int x, int y, Board brd){
         super(x,y,brd);
     }
 

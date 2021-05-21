@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Rob {
     protected int robID;
@@ -10,27 +11,111 @@ public class Rob {
     Dodatnia liczba to wielokrotność 90 stopni od kąta 0 w prawo.
      */
     Simulation world;
-    ArrayList program;
+    Programm program;
     protected int energy;
-    protected int age;
+    protected int birth;
+    public boolean dead;
 
-    public Rob(int ID, int angle, Field home, int energy, Simulation sim){
+    public Rob(int ID, int birth, int angle, Field home, int energy, Simulation sim, String programm){
         this.robID = ID;
-        this.home = home;
-        this.age = 0;
+        this.birth = birth;
         this.angle = angle;
+        this.home = home;
         this.energy = energy;
         this.world = sim;
+        this.program=new Programm(this, sim.board, programm);
+        this.home.visit();
+        this.dead = false;
     }
 
-    protected Rob reproduce(){
-        Rob
+
+    protected boolean doATurn(){
+        boolean alive = true;
+        alive = this.program.execute();
+        this.energy -= world.params.turnCost;
+        alive = (!checkIfDead());
+
+        if (this.energy >= world.params.breedingMinimum){
+            boolean breed = Math.random() <= world.params.breedingProbability;
+            if(breed) {
+                world.newBodyReported(
+                        breed()
+                );
+            }
+        }
+
+        return alive;
     }
 
-    protected boolean checkIfDead(){
-        return this.energy<=0;
+    //sprawdza, czy rob "jeszcze żyje"
+    public boolean checkIfDead(){
+        if(this.dead)
+            return true;
+        else {
+            if(this.energy<=0) {
+                this.dead = true;
+                world.deadBodyReported(this);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
+    protected Rob breed(){
+        boolean add = Math.random() <= world.params.mutationAdditionProbability;
+        boolean remove = Math.random() <= world.params.mutationRemovalProbability;
+        boolean modify = Math.random() <= world.params.mutationModifierProbability;
+
+        int newLenght = program.lenght;
+        if(add)
+            newLenght++;
+        if(remove)
+            newLenght--;
+
+        String childProgram = "";
+        char[] parentProgram = program.raw.toCharArray();
+        int modIndex = -1; //ujemna, by nigdy nie była równa indeksowi - wtedy nie zastąpi
+        if(modify)
+            modIndex = (int) (Math.random() * program.lenght);
+
+        int i=0;
+        while(i<program.lenght-1) {
+            if(i == modIndex) {
+                childProgram += world.params.includedInstructions[
+                        (int)(Math.random() * world.params.includedInstructions.length) ];
+            } else {
+                childProgram += parentProgram[i];
+            }
+            i++;
+        }
+
+        if(!remove) {
+            childProgram += parentProgram[i];
+            i++;
+        }
+        if(add) {
+            childProgram += world.params.includedInstructions[
+                    (int)(Math.random() * world.params.includedInstructions.length) ];
+        }
+
+        int energyForChild = (int)(this.energy * world.params.breedingPart);
+        this.energy -= energyForChild;
+
+        Rob child = new Rob(
+                world.getFreeID(),
+                world.turn,
+                (this.angle + 2)%4,     //obrócony w przeciwną stronę
+                this.home,
+                energyForChild,
+                world,
+                childProgram
+        );
+
+        return child;
+    }
+
+    //porusza się o <steps> pól w stronę w którą jest zwrócony
     protected void move(int steps) {
         int xPosition = home.xPos;
         int yPosition = home.yPos;
@@ -65,6 +150,7 @@ public class Rob {
 
     }
 
+    //obraca o kąt angle, w stronę definiowaną przez drugi argument
     protected void rotate(int angle, boolean left){
         if(!left) {
             this.angle += angle % 4;
@@ -74,16 +160,25 @@ public class Rob {
         angle = angle % 4;
     }
 
+    public int age() {
+        return world.turn-birth;
+    }
+
+    //ustawia kąt
     protected void setAngle(int goal) {
         this.angle=goal;
     }
 
+    //ustawia nową pozycję
     protected void setHome(Field goal) {
         home.leave();
         this.home = goal;
         home.visit();
+        if(home.hasFood())
+            replenish();
     }
 
+    //żywi Roba
     protected void replenish() {
         this.energy += world.params.nutritiousValue;
     }

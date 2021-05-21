@@ -1,9 +1,13 @@
 import java.util.ArrayList;
 
 public class Sniff extends Instruction{
-    public Sniff(){};
+    public Sniff(Programm partOf){
+        super(partOf);
+    }
 
     protected void execute(){
+        super.execute();
+
         ArrayList<Integer> possible = new ArrayList<Integer>();
         Field root = partOf.owner.home;
         if(partOf.board.at(root.xPos, root.yPos+1).hasFood())

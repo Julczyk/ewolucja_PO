@@ -2,7 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-public class Plansza {
+public class Board {
 
     protected int xSize;
     protected int ySize;
@@ -10,7 +10,7 @@ public class Plansza {
     protected Field[][] fields;
     int seasonLenght;
 
-    public Plansza() {
+    public Board() {
         this.rawData="";
         this.ySize = 0;
         this.xSize = 0;

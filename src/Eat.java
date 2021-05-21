@@ -1,9 +1,13 @@
 import java.util.ArrayList;
 
 public class Eat extends Instruction{
-    public Eat(){}
+    public Eat(Programm partOf){
+        super(partOf);
+    }
 
     protected void execute(){
+        super.execute();
+
         ArrayList<Field> possible = new ArrayList<Field>();
         Field root = partOf.owner.home;
 

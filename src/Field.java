@@ -4,9 +4,9 @@ public class Field {
     protected int visited;
     public int xPos;
     public int yPos;
-    protected Plansza board;
+    protected Board board;
 
-    public Field(int x, int y, Plansza brd) {
+    public Field(int x, int y, Board brd) {
         this.xPos = x;
         this.yPos = y;
         this.standing = 0;

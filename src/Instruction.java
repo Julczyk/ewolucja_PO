@@ -2,12 +2,13 @@ public class Instruction {
 
     int cost;
     Programm partOf;
-    public Instruction(){
+    public Instruction(Programm partOf){
         this.cost = 1;
+        this.partOf = partOf;
     }
 
-    public void execute(char task){
-
+    protected void execute(){
+        partOf.owner.energy -= cost;
     }
 }
 

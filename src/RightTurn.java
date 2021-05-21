@@ -1,8 +1,11 @@
 public class RightTurn extends Instruction{
 
-    public RightTurn(){}
+    public RightTurn(Programm partOf){
+        super(partOf);
+    }
 
     protected void execute(){
+        super.execute();
         partOf.owner.rotate(1, false);
     }
 }
