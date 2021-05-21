@@ -27,6 +27,7 @@ public class Field {
     protected void leave(){
         standing--;
     }
+
     protected void newTurn(){
         visited = 0;
     }

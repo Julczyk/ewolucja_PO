@@ -20,9 +20,7 @@ public class Programm {
         //dodatkowy koszt za zbyt długi program (dla punktu równowagi)
         this.penalty = Math.max(
                 (int)(
-                        Math.pow(
-                                (double)((lenght - owner.world.params.movesWithousEnergyLoss) * owner.world.params.turnCost),
-                                1/3)
+                        Math.log((double)((lenght - owner.world.params.movesWithousEnergyLoss) * owner.world.params.turnCost))
                 ), 0);
 
 

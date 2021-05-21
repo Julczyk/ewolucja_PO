@@ -4,14 +4,14 @@ import java.util.Arrays;
 public class Rob {
     protected int robID;
 
-    Field home;
+    protected Field home;
     protected int angle;
     /*
     Konwencja kierunku zaczerpnięta z nawigacji morskiej i powietrznej. Kąt 0 to kurs na północ (do góry).
     Dodatnia liczba to wielokrotność 90 stopni od kąta 0 w prawo.
      */
-    Simulation world;
-    Programm program;
+    protected Simulation world;
+    protected Programm program;
     protected int energy;
     protected int birth;
     public boolean dead;
@@ -90,7 +90,7 @@ public class Rob {
             i++;
         }
 
-        if(!remove) {
+        if(!remove && parentProgram.length>0) {
             childProgram += parentProgram[i];
             i++;
         }

@@ -54,7 +54,6 @@ public class Simulation {
     }
 
     protected void newBodyReported(Rob newborn){
-        newborn.home.visit();
         robs.add(newborn);
     }
 
@@ -64,8 +63,7 @@ public class Simulation {
 
         while(turn < params.simDuration) {
             if(robs.size() <= 0) {
-                System.out.print("Symulacja przerwana, ostatni rob wyginął w turze");
-                System.out.println(turn);
+                printExtinctMessage();
                 break;
             }
 
@@ -76,8 +74,10 @@ public class Simulation {
                 printReport();
         }
 
-        printReport();
-        printRobList();
+        if(robs.size()>0) {
+            printReport();
+            printRobList();
+        }
     }
 
     private void doATurn(){
@@ -89,6 +89,12 @@ public class Simulation {
                 board.at(x,y).newTurn();
             }
         }
+    }
+
+    public void printExtinctMessage(){
+        System.out.print("\n\n\n-!!!-\nSymulacja przerwana, ostatni rob wyginął w turze ");
+        System.out.println(turn);
+        System.out.println("Raport końcowy:");
     }
 
     public void printReport(){
